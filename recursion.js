@@ -11,13 +11,13 @@ function product(nums) {
 /** longest: return the length of the longest word in an array of words. */
 /** [apple, banana, cantaloupe, beet] */
 
-function longest(words, length = 0) {
+function longest(words) {
 
-  if (words.length === 0) return length;
+  if (words.length === 0) return 0; //[]
 
-  if (words[0].length > length) length = words[0].length;
+  // const longestWord = words[0].length > longest(words.slice(1)) ? words[0].length : longest(words.slice(1));
 
-  return longest(words.slice(1), length);
+  return Math.max(words[0].length, longest(words.slice(1)));
 }
 
 /** everyOther: return a string with every other letter. */
