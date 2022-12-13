@@ -62,16 +62,31 @@ function revString(str) { //"apple"
 
   if (str.length === 0) return ""; //base case
 
-  return str[str.length - 1] + revString(str.slice(0, -1));
+  return revString(str.slice(1)) + str[0];
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val, idx = 0) { //['duck', "cat", "cat", 'pony'] //val = cat
-  if (arr[idx] === undefined) return -1;
-  if (arr[idx] === val) return idx;
-  idx++;
-  return findIndex(arr, val, idx);
+function findIndex(arr, val) { //['duck', "cat", "cat", 'pony'] //val = donkey
+  if (arr.length === 0) return -1;
+
+  if (arr[0] === val) return 0;
+
+  // if (arr.length === 0) {
+  //   return -1;
+  // } else if (arr[0] === val) {
+  //   return 0;
+  // }
+
+  return findIndex(arr.slice(1), val) === -1 ? -1 : 1 + findIndex(arr.slice(1), val);
+  // return findIndex(arr.slice(1), val) + 1;
+
+  ///// 1 + findIndex ("pony")
+  ////// 1 + findIndex ("cat", "pony")
+  /////// 1 + findIndex("cat", "cat", "pony")
+
+  //['duck', "cat", "cat", 'pony'] //val = pony
+
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
