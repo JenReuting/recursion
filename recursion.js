@@ -44,18 +44,34 @@ function find(arr, val) {
 
 function isPalindrome(str) {
 
+  if (str.length <= 1) return true;
+
+  if (str[0] !== str[str.length - 1]) return false;
+
+  return isPalindrome(str.slice(1, str.length - 1));
 }
 
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str) {
+function revString(str) { //"apple"
+  // if (str.length > 0) {
+  //   return str[str.length - 1] + revString(str.slice(0, -1));
+  // } else {
+  //   return ""; //this can be an empty string instead
+  // }
 
+  if (str.length === 0) return ""; //base case
+
+  return str[str.length - 1] + revString(str.slice(0, -1));
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-
+function findIndex(arr, val, idx = 0) { //['duck', "cat", "cat", 'pony'] //val = cat
+  if (arr[idx] === undefined) return -1;
+  if (arr[idx] === val) return idx;
+  idx++;
+  return findIndex(arr, val, idx);
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
