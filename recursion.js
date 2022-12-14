@@ -107,10 +107,44 @@ function binarySearch(arr, val) {
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
-
+//ANSWER = 3
 function binarySearchIndex(arr, val) {
+  //ARR = [1, 2, 3, 4] VAL = 4
+  //ARR = [3, 4]
+  //ARR = [4]
 
+  if (arr.length === 0) return -1;
+  //false
+  //false
+  //false
+
+  let min = 0;
+  let max = arr.length - 1;
+  //max = 4 - 1 = 3
+  //max = 2 - 1 = 1
+  //max = 1-1 = 0
+
+  let median = Math.floor((min + max) / 2);
+  //median = 1
+  //median = 0
+  //median = 0
+
+  if (arr[median] === val) return 0;
+  //is 2 === 4? false
+  //is 3 === 4? false
+  //is 4 === 4? true ===> return 0
+
+  if (arr[median] > val) return median + binarySearch(arr.slice(0, median), val);
+  // is 2 > 4 ? false
+  // is 3 > 4 ? false
+
+  if (arr[median] < val) return median + binarySearch(arr.slice(median + 1, arr.length), val);
+  // is 2 < 4 ? true
+  // is 3 < 4 ? true
 }
+
+////////// binarySearch([1], 1) ====> 0
+//////////// binarySearch([1,2] 1) ====> return 1 + binarySearch([1], 1)
 
 // you might find the above two problems easier if you change the function signature to:
 //
