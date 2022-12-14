@@ -109,39 +109,40 @@ function binarySearch(arr, val) {
  * return the index of that value (or -1 if val is not present). */
 //ANSWER = 3
 function binarySearchIndex(arr, val) {
-  //ARR = [1, 2, 3, 4] VAL = 4
-  //ARR = [3, 4]
-  //ARR = [4]
+  //ARR = [1, 2] VAL = 11    //EXPECTED ANSWER = 1
+  //ARR = [2] VAL = 11
 
   if (arr.length === 0) return -1;
   //false
   //false
+  if (arr.length === 1 && arr[0] !== val) return -1;
   //false
 
-  let min = 0;
-  let max = arr.length - 1;
-  //max = 4 - 1 = 3
-  //max = 2 - 1 = 1
-  //max = 1-1 = 0
-
-  let median = Math.floor((min + max) / 2);
+  let median = Math.floor((arr.length) / 2);
   //median = 1
   //median = 0
-  //median = 0
+  let rightArr = arr.slice(median, arr.length);
+  //arr.slice(1, 2) ---> [2]
+  //arr.slice(0, 1) ----> [2]
+  let leftArr = arr.slice(0, median);
+  //arr.slice(0, 1) ---> [1]
+  //arr.slice(0, 0) ----> []
 
-  if (arr[median] === val) return 0;
-  //is 2 === 4? false
-  //is 3 === 4? false
-  //is 4 === 4? true ===> return 0
-
-  if (arr[median] > val) return median + binarySearch(arr.slice(0, median), val);
-  // is 2 > 4 ? false
-  // is 3 > 4 ? false
-
-  if (arr[median] < val) return median + binarySearch(arr.slice(median + 1, arr.length), val);
-  // is 2 < 4 ? true
-  // is 3 < 4 ? true
+  if (arr[median] === val) return median;
+  //is 2 === 11? false
+  //is 2 === 11? false
+  if (arr[median] > val) return 0 + binarySearchIndex(leftArr, val);
+  //is 2 > 11? false
+  //is 2 > 11? false
+  if (arr[median] < val) return leftArr.length + binarySearchIndex(rightArr, val);
+  //is 2 < 11? true ----> 1 + binarySearchIndex([2])
+  //is 2 < 11? true ----> 1 + binarySearchIndex([2])
+  return binarySearchIndex(arr, val) === -1 ? -1 : 0;
 }
+
+
+
+///////// 1 + binarySearchIndex([2])
 
 ////////// binarySearch([1], 1) ====> 0
 //////////// binarySearch([1,2] 1) ====> return 1 + binarySearch([1], 1)
